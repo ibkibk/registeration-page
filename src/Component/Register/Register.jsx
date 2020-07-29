@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import firebase, { providers } from "../../firebase";
 
 const initialState = {
+  user: null,
   email: "",
   password: "",
   name: "",
@@ -35,7 +37,7 @@ class Register extends Component {
       emailError = "invalid email";
     }
 
-    if (!this.state.password > 6) {
+    if (!this.state.password) {
       passwordError = "invalid password";
     }
 
@@ -60,9 +62,26 @@ class Register extends Component {
       [name]: value,
     });
   }
+  signUp = () => {
+    firebase
+      .auth()
+      .signInWithPopup(providers.google)
+      .then((result) => {
+        this.setState({ user: result.user });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleSubmit(e) {
     e.preventDefault();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((error) => {
+        this.setState({ fireErrors: error.message });
+      });
     const isValid = this.validate();
     if (isValid) {
       console.log(this.state);
@@ -125,7 +144,7 @@ class Register extends Component {
             />
           </div>
           <div style={{ fontSize: 12, color: "red" }}>
-            {this.state.nameError}
+            {this.state.emailError}
           </div>
           <div className="FormField">
             <label className="FormField__CheckboxLabel">
@@ -148,7 +167,11 @@ class Register extends Component {
 
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign Up</button>{" "}
-            <button to="/sign-in" className="FormField__Button mr-20">
+            <button
+              onClick={this.signUp}
+              to="/sign-in"
+              className="FormField__Button mr-20"
+            >
               Sign up with Google
             </button>
           </div>

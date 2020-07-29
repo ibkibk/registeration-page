@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import firebase, { providers } from "../../firebase";
 
 const initialState = {
+  user: null,
   email: "",
   password: "",
   fireErrors: "",
@@ -48,8 +50,28 @@ class SignInForm extends Component {
     });
   }
 
+  signIn = () => {
+    firebase
+      .auth()
+      .signInWithPopup(providers.google)
+      .then((result) => {
+        this.setState({ user: result.user });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   handleSubmit(e) {
     e.preventDefault();
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((error) => {
+        console.log(error);
+
+        this.setState({ fireErrors: error.message });
+      });
     const isValid = this.validate();
     if (isValid) {
       console.log(this.state);
@@ -104,8 +126,10 @@ class SignInForm extends Component {
           </div>
 
           <div className="FormField">
-            <button className="FormField__Button ">Sign In</button>{" "}
-            <button to="/" className="FormField__Button ">
+            <button onClick={this.handleSubmit} className="FormField__Button ">
+              Sign In
+            </button>{" "}
+            <button onClick={this.signIn} to="/" className="FormField__Button ">
               Sign In with google
             </button>
           </div>
