@@ -25,18 +25,26 @@ class Register extends Component {
 
   validate = () => {
     let nameError = "";
+    let emailError = "";
+    let passwordError = "";
     let hasAgreedError = false;
 
     if (!this.state.name) {
       nameError = "Name Required";
+    }
+    if (!this.state.email) {
+      emailError = "Email Required";
+    }
+    if (!this.state.password) {
+      passwordError = "Password Required";
     }
 
     if (!this.state.hasAgreed) {
       hasAgreedError = "Required";
     }
 
-    if (nameError || hasAgreedError) {
-      this.setState({ nameError, hasAgreedError });
+    if (nameError || hasAgreedError || passwordError || emailError) {
+      this.setState({ nameError, hasAgreedError, passwordError, emailError });
       return false;
     }
 
@@ -103,6 +111,8 @@ class Register extends Component {
       hasAgreed,
       hasAgreedError,
       fireErrors,
+      emailError,
+      passwordError,
       nameError,
     } = this.state;
     const { signUp, handleChange, handleSubmit } = this;
@@ -141,6 +151,7 @@ class Register extends Component {
               value={password}
               onChange={handleChange}
             />
+            <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
           </div>
           <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
@@ -155,6 +166,7 @@ class Register extends Component {
               value={email}
               onChange={handleChange}
             />
+            <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
           </div>
 
           <div className="FormField">
