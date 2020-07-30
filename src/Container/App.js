@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     const { user } = this.state;
     return (
-      <Router basename="/react-auth-ui/">
+      <Router>
         <div className="App">
           {user ? (
             <LoggedIn />
