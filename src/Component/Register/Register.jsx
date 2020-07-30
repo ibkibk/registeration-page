@@ -66,19 +66,19 @@ class Register extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state);
+      this.setState({ initialState });
+    } else {
+      return false;
+    }
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .catch((error) => {
         this.setState({ fireErrors: error.message });
       });
-    const isValid = this.validate();
-    if (isValid) {
-      console.log(this.state);
-      this.setState(initialState);
-    } else {
-      return false;
-    }
   }
 
   render() {
