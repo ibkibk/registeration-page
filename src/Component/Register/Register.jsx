@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase, { providers } from "../../firebase";
+import firebase, { providers, db } from "../../firebase";
 
 const initialState = {
   user: null,
@@ -50,6 +50,7 @@ class Register extends Component {
 
     this.setState({
       [name]: value,
+      users: e.target.value,
     });
   }
   signUp = () => {
@@ -79,6 +80,13 @@ class Register extends Component {
       .catch((error) => {
         this.setState({ fireErrors: error.message });
       });
+
+    if (this.state.user !== "") {
+      db.collection("users").add({
+        user: this.state.name,
+      });
+      this.setState({ user: this.state.name });
+    }
   }
 
   render() {
