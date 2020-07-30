@@ -4,7 +4,6 @@ import { Button } from "semantic-ui-react";
 
 const Logout = () => {
   const [names, setNames] = useState("");
-  const [users, setUsers] = useState("");
 
   useEffect(() => {
     db.collection("names").onSnapshot((snapshot) => {
@@ -16,18 +15,6 @@ const Logout = () => {
   const signOut = () => {
     firebase.auth().signOut();
   };
-
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   if (users !== "") {
-  //     db.collection("users").add({
-  //       users: users,
-  //     });
-  //     setUsers("");
-  //   } else {
-  //     return false;
-  //   }
-  // };
 
   return (
     <div
@@ -45,33 +32,6 @@ const Logout = () => {
       </Button>
       <h2>This message is coming from firebase database</h2>
       <p>{names}</p>
-      {/* <p></p> */}
-      {/* <h2>
-        The information you will enter will be stored in firebase database
-      </h2> */}
-      {/* <div style={{ display: "grid", justifyContent: "center" }}>
-        <input
-          style={{
-            width: "150px",
-            height: "34px",
-            marginLeft: "5px",
-            border: "none",
-            fontSize: "18px",
-            borderRadius: "3px",
-            marginBottom: "10px",
-          }}
-          placeholder="Enter your name"
-          type="text"
-          onChange={(e) => setUsers(e.target.value)}
-        />
-        <Button
-          style={{ width: "150px", height: "35px", marginLeft: "5px" }}
-          primary
-          onClick={(e) => submit(e)}
-        >
-          Add info
-        </Button>
-      </div> */}
     </div>
   );
 };
