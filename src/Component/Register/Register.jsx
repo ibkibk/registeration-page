@@ -30,19 +30,19 @@ class Register extends Component {
     let hasAgreedError = false;
 
     if (!this.state.name) {
-      nameError = "name cannot be blank";
+      nameError = "Name Required";
     }
 
     if (!this.state.email.includes("@")) {
-      emailError = "invalid email";
+      emailError = "Invalid Email";
     }
 
     if (!this.state.password) {
-      passwordError = "invalid password";
+      passwordError = "Invalid Password";
     }
 
     if (!this.state.hasAgreed) {
-      hasAgreedError = "n";
+      hasAgreedError = "Required";
     }
 
     if (emailError || nameError || passwordError || hasAgreedError) {
@@ -142,10 +142,11 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
+            <div style={{ fontSize: 12, color: "red" }}>
+              {this.state.emailError}
+            </div>
           </div>
-          <div style={{ fontSize: 12, color: "red" }}>
-            {this.state.emailError}
-          </div>
+
           <div className="FormField">
             <label className="FormField__CheckboxLabel">
               <input
@@ -155,13 +156,13 @@ class Register extends Component {
                 value={this.state.hasAgreed}
                 onChange={this.handleChange}
               />
-              <div style={{ fontSize: 12, color: "red" }}>
-                {this.state.hasAgreedError}
-              </div>
               I agree all statements in{" "}
               <a href="" className="FormField__TermsLink">
                 terms of service
               </a>
+              <div style={{ fontSize: 12, color: "red" }}>
+                {this.state.hasAgreedError}
+              </div>
             </label>
           </div>
 

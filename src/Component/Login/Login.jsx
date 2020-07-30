@@ -69,7 +69,6 @@ class SignInForm extends Component {
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch((error) => {
         console.log(error);
-
         this.setState({ fireErrors: error.message });
       });
     const isValid = this.validate();

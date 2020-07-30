@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route, NavLink } from "react-router-dom";
 import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
-// import Home from "../Component/Home/Home";
 import LoggedIn from "../Component/Logout/LoggedIn";
 import firebase from "../firebase";
 
@@ -30,33 +29,32 @@ class App extends Component {
     return (
       <Router basename="/react-auth-ui/">
         <div className="App">
-          <div className="App__Aside"></div>
           {this.state.user ? (
             <LoggedIn />
           ) : (
-            <div className="App__Form">
-              <div className="PageSwitcher"></div>
-
-              <div className="FormTitle">
-                <NavLink
-                  to="/sign-in"
-                  activeClassName="FormTitle__Link--Active"
-                  className="FormTitle__Link"
-                >
-                  Sign In
-                </NavLink>{" "}
-                or{" "}
-                <NavLink
-                  exact
-                  to="/"
-                  activeClassName="FormTitle__Link--Active"
-                  className="FormTitle__Link"
-                >
-                  Sign Up
-                </NavLink>
+            <div className="App__Added">
+              <div className="App__Form">
+                <div className="FormTitle">
+                  <NavLink
+                    to="/sign-in"
+                    activeClassName="FormTitle__Link--Active"
+                    className="FormTitle__Link"
+                  >
+                    Sign In
+                  </NavLink>{" "}
+                  or{" "}
+                  <NavLink
+                    exact
+                    to="/"
+                    activeClassName="FormTitle__Link--Active"
+                    className="FormTitle__Link"
+                  >
+                    Sign Up
+                  </NavLink>
+                </div>
+                <Route exact path="/" component={Register}></Route>
+                <Route path="/sign-in" component={Login}></Route>
               </div>
-              <Route exact path="/" component={Register}></Route>
-              <Route path="/sign-in" component={Login}></Route>
             </div>
           )}
         </div>
