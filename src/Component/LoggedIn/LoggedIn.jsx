@@ -17,17 +17,17 @@ const Logout = () => {
     firebase.auth().signOut();
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (users !== "") {
-      db.collection("users").add({
-        users: users,
-      });
-      setUsers("");
-    } else {
-      return false;
-    }
-  };
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   if (users !== "") {
+  //     db.collection("users").add({
+  //       users: users,
+  //     });
+  //     setUsers("");
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   return (
     <div
@@ -45,11 +45,11 @@ const Logout = () => {
       </Button>
       <h2>This message is coming from firebase database</h2>
       <p>{names}</p>
-      <p></p>
-      <h2>
+      {/* <p></p> */}
+      {/* <h2>
         The information you will enter will be stored in firebase database
-      </h2>
-      <div style={{ display: "grid", justifyContent: "center" }}>
+      </h2> */}
+      {/* <div style={{ display: "grid", justifyContent: "center" }}>
         <input
           style={{
             width: "150px",
@@ -71,7 +71,7 @@ const Logout = () => {
         >
           Add info
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
