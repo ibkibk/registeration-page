@@ -25,28 +25,20 @@ class Register extends Component {
 
   validate = () => {
     let nameError = "";
-    let emailError = "";
-    let passwordError = "";
+    // let emailError = "";
+    // let passwordError = "";
     let hasAgreedError = false;
 
     if (!this.state.name) {
       nameError = "Name Required";
     }
 
-    if (!this.state.email.includes("@")) {
-      emailError = "Invalid Email";
-    }
-
-    if (!this.state.password) {
-      passwordError = "Invalid Password";
-    }
-
     if (!this.state.hasAgreed) {
       hasAgreedError = "Required";
     }
 
-    if (emailError || nameError || passwordError || hasAgreedError) {
-      this.setState({ emailError, nameError, passwordError, hasAgreedError });
+    if (nameError || hasAgreedError) {
+      this.setState({ nameError, hasAgreedError });
       return false;
     }
 
@@ -92,8 +84,12 @@ class Register extends Component {
   }
 
   render() {
+    let errorNotification = this.state.fireErrors ? (
+      <div className="Error"> {this.state.fireErrors} </div>
+    ) : null;
     return (
       <div className="FormCenter">
+        {errorNotification}
         <form onSubmit={this.handleSubmit} className="FormFields">
           <div className="FormField">
             <label className="FormField__Label" htmlFor="name">

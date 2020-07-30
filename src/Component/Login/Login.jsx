@@ -20,25 +20,25 @@ class SignInForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  validate = () => {
-    let emailError = "";
-    let passwordError = "";
+  // validate = () => {
+  //   let emailError = "";
+  //   let passwordError = "";
 
-    if (!this.state.password.length) {
-      passwordError = "invalid password";
-    }
+  //   if (!this.state.password.length) {
+  //     passwordError = "Password required";
+  //   }
 
-    if (!this.state.email.includes("@")) {
-      emailError = "invalid email";
-    }
+  //   if (!this.state.email.includes("@")) {
+  //     emailError = "invalid email";
+  //   }
 
-    if (emailError || passwordError) {
-      this.setState({ emailError, passwordError });
-      return false;
-    }
+  //   if (emailError || passwordError) {
+  //     this.setState({ emailError, passwordError });
+  //     return false;
+  //   }
 
-    return true;
-  };
+  //   return true;
+  // };
 
   handleChange(e) {
     let target = e.target;
@@ -71,23 +71,23 @@ class SignInForm extends Component {
         console.log(error);
         this.setState({ fireErrors: error.message });
       });
-    const isValid = this.validate();
-    if (isValid) {
-      console.log(this.state);
-      this.setState(initialState);
-    } else {
-      return false;
-    }
+    // const isValid = this.validate();
+    // if (isValid) {
+    //   console.log(this.state);
+    //   this.setState(initialState);
+    // } else {
+    //   return false;
+    // }
   }
 
   render() {
+    let errorNotification = this.state.fireErrors ? (
+      <div className="Error"> {this.state.fireErrors} </div>
+    ) : null;
     return (
       <div className="FormCenter">
-        <form
-          onSubmit={this.handleSubmit}
-          className="FormFields"
-          onSubmit={this.handleSubmit}
-        >
+        {errorNotification}
+        <form onSubmit={this.handleSubmit} className="FormFields">
           <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
               E-Mail Address
