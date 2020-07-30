@@ -4,7 +4,6 @@ import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
 import LoggedIn from "../Component/Logout/LoggedIn";
 import firebase from "../firebase";
-
 import "./App.css";
 
 class App extends Component {
@@ -26,10 +25,11 @@ class App extends Component {
     });
   }
   render() {
+    const { user } = this.state;
     return (
       <Router basename="/react-auth-ui/">
         <div className="App">
-          {this.state.user ? (
+          {user ? (
             <LoggedIn />
           ) : (
             <div className="App__Added">

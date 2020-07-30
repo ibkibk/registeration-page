@@ -25,8 +25,6 @@ class Register extends Component {
 
   validate = () => {
     let nameError = "";
-    // let emailError = "";
-    // let passwordError = "";
     let hasAgreedError = false;
 
     if (!this.state.name) {
@@ -84,13 +82,23 @@ class Register extends Component {
   }
 
   render() {
-    let errorNotification = this.state.fireErrors ? (
-      <div className="Error"> {this.state.fireErrors} </div>
+    const {
+      name,
+      password,
+      email,
+      hasAgreed,
+      hasAgreedError,
+      fireErrors,
+      nameError,
+    } = this.state;
+    const { signUp, handleChange, handleSubmit } = this;
+    let errorNotification = fireErrors ? (
+      <div className="Error"> {fireErrors} </div>
     ) : null;
     return (
       <div className="FormCenter">
         {errorNotification}
-        <form onSubmit={this.handleSubmit} className="FormFields">
+        <form onSubmit={handleSubmit} className="FormFields">
           <div className="FormField">
             <label className="FormField__Label" htmlFor="name">
               Full Name
@@ -101,12 +109,10 @@ class Register extends Component {
               className="FormField__Input"
               placeholder="Enter your full name"
               name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
+              value={name}
+              onChange={handleChange}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
-              {this.state.nameError}
-            </div>
+            <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
           </div>
           <div className="FormField">
             <label className="FormField__Label" htmlFor="password">
@@ -118,12 +124,9 @@ class Register extends Component {
               className="FormField__Input"
               placeholder="Enter your password"
               name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
+              value={password}
+              onChange={handleChange}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
-              {this.state.passwordError}
-            </div>
           </div>
           <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
@@ -135,12 +138,9 @@ class Register extends Component {
               className="FormField__Input"
               placeholder="Enter your email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={email}
+              onChange={handleChange}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
-              {this.state.emailError}
-            </div>
           </div>
 
           <div className="FormField">
@@ -149,23 +149,21 @@ class Register extends Component {
                 className="FormField__Checkbox"
                 type="checkbox"
                 name="hasAgreed"
-                value={this.state.hasAgreed}
-                onChange={this.handleChange}
+                value={hasAgreed}
+                onChange={handleChange}
               />
               I agree all statements in{" "}
               <a href="" className="FormField__TermsLink">
                 terms of service
               </a>
-              <div style={{ fontSize: 12, color: "red" }}>
-                {this.state.hasAgreedError}
-              </div>
+              <div style={{ fontSize: 12, color: "red" }}>{hasAgreedError}</div>
             </label>
           </div>
 
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign Up</button>{" "}
             <button
-              onClick={this.signUp}
+              onClick={signUp}
               to="/sign-in"
               className="FormField__Button mr-20"
             >

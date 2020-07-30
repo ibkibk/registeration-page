@@ -6,8 +6,6 @@ const initialState = {
   email: "",
   password: "",
   fireErrors: "",
-  emailError: "",
-  passwordError: "",
 };
 
 class SignInForm extends Component {
@@ -19,26 +17,6 @@ class SignInForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // validate = () => {
-  //   let emailError = "";
-  //   let passwordError = "";
-
-  //   if (!this.state.password.length) {
-  //     passwordError = "Password required";
-  //   }
-
-  //   if (!this.state.email.includes("@")) {
-  //     emailError = "invalid email";
-  //   }
-
-  //   if (emailError || passwordError) {
-  //     this.setState({ emailError, passwordError });
-  //     return false;
-  //   }
-
-  //   return true;
-  // };
 
   handleChange(e) {
     let target = e.target;
@@ -71,23 +49,19 @@ class SignInForm extends Component {
         console.log(error);
         this.setState({ fireErrors: error.message });
       });
-    // const isValid = this.validate();
-    // if (isValid) {
-    //   console.log(this.state);
-    //   this.setState(initialState);
-    // } else {
-    //   return false;
-    // }
   }
 
   render() {
-    let errorNotification = this.state.fireErrors ? (
-      <div className="Error"> {this.state.fireErrors} </div>
+    const { password, email, fireErrors } = this.state;
+    const { signIn, handleChange, handleSubmit } = this;
+
+    let errorNotification = fireErrors ? (
+      <div className="Error"> {fireErrors} </div>
     ) : null;
     return (
       <div className="FormCenter">
         {errorNotification}
-        <form onSubmit={this.handleSubmit} className="FormFields">
+        <form onSubmit={handleSubmit} className="FormFields">
           <div className="FormField">
             <label className="FormField__Label" htmlFor="email">
               E-Mail Address
@@ -98,12 +72,9 @@ class SignInForm extends Component {
               className="FormField__Input"
               placeholder="Enter your email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={email}
+              onChange={handleChange}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
-              {this.state.emailError}
-            </div>
           </div>
 
           <div className="FormField">
@@ -116,19 +87,16 @@ class SignInForm extends Component {
               className="FormField__Input"
               placeholder="Enter your password"
               name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
+              value={password}
+              onChange={handleChange}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
-              {this.state.passwordError}
-            </div>
           </div>
 
           <div className="FormField">
-            <button onClick={this.handleSubmit} className="FormField__Button ">
+            <button onClick={handleSubmit} className="FormField__Button ">
               Sign In
             </button>{" "}
-            <button onClick={this.signIn} to="/" className="FormField__Button ">
+            <button onClick={signIn} to="/" className="FormField__Button ">
               Sign In with google
             </button>
           </div>
