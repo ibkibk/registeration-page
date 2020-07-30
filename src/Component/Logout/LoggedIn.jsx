@@ -1,9 +1,16 @@
-import React from "react";
-import firebase from "../../firebase";
-// import style from "../LoggedIn/LoggedIn.mo";
+import React, { useState, useEffect } from "react";
+import firebase, { db } from "../../firebase";
 import { Button } from "semantic-ui-react";
 
 const Logout = () => {
+  const [names, setNames] = useState("");
+
+  useEffect(() => {
+    db.collection("names").onSnapshot((snapshot) => {
+      console.log(snapshot.docs.map((doc) => doc.data().name));
+      setNames(snapshot.docs.map((doc) => doc.data().name));
+    });
+  }, []);
   const signOut = () => {
     firebase.auth().signOut();
   };
@@ -23,6 +30,7 @@ const Logout = () => {
       >
         Logout
       </Button>
+      <p>{names}</p>
     </div>
   );
 };
