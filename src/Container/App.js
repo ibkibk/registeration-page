@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route, NavLink } from "react-router-dom";
 import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
-import LoggedIn from "../Component/Logout/LoggedIn";
+import LoggedIn from "../Component/LoggedIn/LoggedIn";
 import firebase from "../firebase";
 import "./App.css";
 

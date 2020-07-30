@@ -35,7 +35,7 @@ const Logout = () => {
         textAlign: "center",
       }}
     >
-      <h1 style={{ color: "black" }}>Welcome!</h1>
+      <h1 style={{ color: "white" }}>Welcome!</h1>
       <Button
         style={{ width: "150px", height: "35px" }}
         primary
@@ -49,14 +49,16 @@ const Logout = () => {
       <h2>
         The information you will enter will be stored in firebase database
       </h2>
-      <div>
+      <div style={{ display: "grid", justifyContent: "center" }}>
         <input
           style={{
             width: "150px",
-            height: "30px",
+            height: "34px",
             marginLeft: "5px",
             border: "none",
             fontSize: "18px",
+            borderRadius: "3px",
+            marginBottom: "10px",
           }}
           placeholder="Enter your name"
           type="text"
