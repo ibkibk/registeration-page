@@ -84,8 +84,14 @@ class Register extends Component {
     if (this.state.user !== "") {
       db.collection("users").add({
         user: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
       });
-      this.setState({ user: this.state.name });
+      this.setState({
+        user: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      });
     }
   }
 
