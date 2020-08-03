@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase, { providers } from "../../firebase";
 
-const SignInForm = (props) => {
+const Login = (props) => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,4 +80,4 @@ const SignInForm = (props) => {
   );
 };
 
-export default SignInForm;
+export default Login;

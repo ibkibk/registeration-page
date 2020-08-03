@@ -227,7 +227,6 @@ const Register = () => {
     if (!password) {
       passwordError = "Password Required";
     }
-
     if (!hasAgreed) {
       hasAgreedError = "require agreement";
     }
@@ -260,7 +259,7 @@ const Register = () => {
     e.preventDefault();
     const isValid = validate();
     if (isValid) {
-      console.log("this.state");
+      console.log("it is working");
       // setErrors("");
     } else {
       console.log("Not working!");
