@@ -3,8 +3,8 @@ import firebase, { providers } from "../../firebase";
 
 const Login = (props) => {
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(props.email || "");
+  const [password, setPassword] = useState(props.password || "");
   const [fireErrors, setFireErrors] = useState("");
 
   const signIn = () => {
@@ -68,10 +68,19 @@ const Login = (props) => {
         </div>
 
         <div className="FormField">
-          <button onClick={handleSubmit} className="FormField__Button ">
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="FormField__Button "
+          >
             Sign In
           </button>{" "}
-          <button onClick={signIn} to="/" className="FormField__Button ">
+          <button
+            type="button"
+            onClick={signIn}
+            to="/"
+            className="FormField__Button "
+          >
             Sign In with google
           </button>
         </div>
