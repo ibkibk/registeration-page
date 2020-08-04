@@ -38,7 +38,7 @@ const Register = (props) => {
     if (!confimPassword) {
       confimPasswordError = "Confim your password";
     }
-    if (confimPassword !== password) {
+    if (confimPassword !== "" && confimPassword !== password) {
       confimPasswordError = "Password does not match";
     }
 
