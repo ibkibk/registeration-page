@@ -9,13 +9,13 @@ const Register = (props) => {
   const [confimPasswordError, setConfimPasswordError] = useState("");
 
   const [user, setUser] = useState(null);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState(props.email || "");
   const [password, setPassword] = useState(props.password || "");
   const [confimPassword, setConfimPassword] = useState(
     props.confimPassword || ""
   );
 
-  const [name, setName] = useState("");
   const [hasAgreed, setHasAgreed] = useState(false);
   const [fireErrors, setFireErrors] = useState("");
 
@@ -43,7 +43,7 @@ const Register = (props) => {
     }
 
     if (!hasAgreed) {
-      hasAgreedError = "require agreement";
+      hasAgreedError = "Require agreement";
     }
 
     if (
@@ -118,13 +118,13 @@ const Register = (props) => {
       });
     }
   };
-  let errorNotification = fireErrors ? (
-    <div className="Error"> {fireErrors} </div>
-  ) : null;
+  // let errorNotification = fireErrors ? (
+  //   <div className="Error"> {fireErrors} </div>
+  // ) : null;
 
   return (
     <div className="FormCenter">
-      {errorNotification}
+      {/* {errorNotification} */}
       <form onSubmit={handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="name">
@@ -161,7 +161,7 @@ const Register = (props) => {
             Confirm Your Password
           </label>
           <input
-            type="ppassword"
+            type="password"
             id="Confimpassword"
             className="FormField__Input"
             placeholder="Confim your password"
