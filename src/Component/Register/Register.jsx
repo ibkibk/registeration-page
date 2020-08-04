@@ -27,16 +27,16 @@ const Register = (props) => {
     let confimPasswordError = "";
 
     if (!name) {
-      nameError = "Name Required";
+      nameError = "Name required";
     }
     if (!email) {
-      emailError = "Email Required";
+      emailError = "Email required";
     }
     if (!password) {
-      passwordError = "Password Required";
+      passwordError = "Password required";
     }
     if (!confimPassword) {
-      confimPasswordError = "Confim Your Password";
+      confimPasswordError = "Confim your password";
     }
     if (confimPassword !== password) {
       confimPasswordError = "Password does not match";
