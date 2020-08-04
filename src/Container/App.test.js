@@ -5,11 +5,6 @@ import App from "./App.js";
 import LoggedIn from "../Component/LoggedIn/LoggedIn";
 import { NavLink } from "react-router-dom";
 
-// it("renders without crashing", () => {
-//   const div = document.createElement("div");
-//   ReactDOM.render(<App />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
 describe("<App />", () => {
   let wrapper;
 

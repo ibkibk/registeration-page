@@ -3,8 +3,9 @@ import { shallow } from "enzyme";
 import LoggedIn from "./LoggedIn";
 
 describe("<LoggedIn/>", () => {
-  it("should render my component", () => {
-    shallow(<LoggedIn />);
-    //   expect(wrapper.find(".FormField__Label")).text("");
+  const container = shallow(<LoggedIn />);
+
+  it("should have button to logout", () => {
+    expect(container.find("button"));
   });
 });
