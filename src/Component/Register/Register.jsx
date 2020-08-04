@@ -177,7 +177,7 @@ const Register = (props) => {
           </label>
           <input
             type="password"
-            id="Confimpassword"
+            id="ConfimPassword"
             className="FormField__Input"
             placeholder="Confim your password"
             name="confimPassword"
