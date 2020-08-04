@@ -142,6 +142,21 @@ const Register = (props) => {
           <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
         </div>
         <div className="FormField">
+          <label className="FormField__Label" htmlFor="email">
+            E-Mail Address
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="FormField__Input"
+            placeholder="Enter your email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
+        </div>
+        <div className="FormField">
           <label className="FormField__Label" htmlFor="password">
             Password
           </label>
@@ -173,22 +188,6 @@ const Register = (props) => {
             {confimPasswordError}
           </div>
         </div>
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="email">
-            E-Mail Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="FormField__Input"
-            placeholder="Enter your email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
-        </div>
-
         <div className="FormField">
           <label className="FormField__CheckboxLabel">
             <input
