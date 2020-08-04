@@ -6,10 +6,13 @@ const Register = () => {
   const [hasAgreedError, sethasAgreedError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [confimPasswordError, setConfimPasswordError] = useState("");
 
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confimPassword, setConfimPassword] = useState("");
+
   const [name, setName] = useState("");
   const [hasAgreed, setHasAgreed] = useState(false);
   const [fireErrors, setFireErrors] = useState("");
@@ -19,6 +22,7 @@ const Register = () => {
     let emailError = "";
     let passwordError = "";
     let hasAgreedError = false;
+    let confimPasswordError = "";
 
     if (!name) {
       nameError = "Name Required";
@@ -29,15 +33,29 @@ const Register = () => {
     if (!password) {
       passwordError = "Password Required";
     }
+    if (!confimPassword) {
+      confimPasswordError = "Confim Your Password";
+    }
+    if (confimPassword !== password) {
+      confimPasswordError = "Password does not match";
+    }
+
     if (!hasAgreed) {
       hasAgreedError = "require agreement";
     }
 
-    if (nameError || hasAgreedError || passwordError || emailError) {
+    if (
+      nameError ||
+      hasAgreedError ||
+      passwordError ||
+      emailError ||
+      confimPasswordError
+    ) {
       setNameError(nameError);
       sethasAgreedError(hasAgreedError);
       setPasswordError(passwordError);
       setEmailError(emailError);
+      setConfimPasswordError(confimPasswordError);
 
       return false;
     }
@@ -86,6 +104,7 @@ const Register = () => {
       email !== "" &&
       name !== "" &&
       password.length >= 6 &&
+      password === confimPassword &&
       hasAgreed !== false
     ) {
       db.collection("users").add({
@@ -93,6 +112,7 @@ const Register = () => {
         password,
         name,
         hasAgreed,
+        confimPassword,
       });
     }
   };
@@ -133,6 +153,23 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
+        </div>
+        <div className="FormField">
+          <label className="FormField__Label" htmlFor="password">
+            Confirm Your Password
+          </label>
+          <input
+            type="password"
+            id="Confimpassword"
+            className="FormField__Input"
+            placeholder="Confim your password"
+            name="confimPassword"
+            value={confimPassword}
+            onChange={(e) => setConfimPassword(e.target.value)}
+          />
+          <div style={{ fontSize: 12, color: "red" }}>
+            {confimPasswordError}
+          </div>
         </div>
         <div className="FormField">
           <label className="FormField__Label" htmlFor="email">
