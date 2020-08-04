@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase, { providers, db } from "../../firebase";
 
-const Register = () => {
+const Register = (props) => {
   const [nameError, setNameError] = useState("");
   const [hasAgreedError, sethasAgreedError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -9,9 +9,11 @@ const Register = () => {
   const [confimPasswordError, setConfimPasswordError] = useState("");
 
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confimPassword, setConfimPassword] = useState("");
+  const [email, setEmail] = useState(props.email || "");
+  const [password, setPassword] = useState(props.password || "");
+  const [confimPassword, setConfimPassword] = useState(
+    props.confimPassword || ""
+  );
 
   const [name, setName] = useState("");
   const [hasAgreed, setHasAgreed] = useState(false);
@@ -159,7 +161,7 @@ const Register = () => {
             Confirm Your Password
           </label>
           <input
-            type="password"
+            type="ppassword"
             id="Confimpassword"
             className="FormField__Input"
             placeholder="Confim your password"

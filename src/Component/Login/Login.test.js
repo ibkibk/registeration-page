@@ -7,11 +7,11 @@ test("Login component should return correct output", () => {
     <Login
       form={{ className: "FormFields" }}
       email={{
-        placeholder: "Custom username",
-        className: "input-username",
+        placeholder: "Enter your email",
+        className: "FormField__Input",
       }}
       password={{
-        placeholder: "Enter your email",
+        placeholder: "Enter your password",
         className: "FormField__Input",
       }}
       onSubmit={(email, password) => {
