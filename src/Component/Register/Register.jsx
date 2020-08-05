@@ -118,13 +118,9 @@ const Register = (props) => {
       });
     }
   };
-  // let errorNotification = fireErrors ? (
-  //   <div className="Error"> {fireErrors} </div>
-  // ) : null;
 
   return (
     <div className="FormCenter">
-      {/* {errorNotification} */}
       <form onSubmit={handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="name">
