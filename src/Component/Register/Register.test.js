@@ -10,9 +10,9 @@ describe("<Register />", () => {
   });
 
   it("should render <Register /> when receiving user data ", () => {
-    expect(wrapper.find("input")).toHaveLength(5);
+    expect(wrapper.find("Form.Input"));
   });
   it("should render <Register /> when receiving user data ", () => {
-    expect(wrapper.find("button")).toHaveLength(2);
+    expect(wrapper.find("Button")).toHaveLength(2);
   });
 });

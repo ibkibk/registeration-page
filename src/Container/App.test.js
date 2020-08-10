@@ -15,7 +15,4 @@ describe("<App />", () => {
   it("should render  <LoggedIn /> if user loggedIn", () => {
     expect(wrapper.find(LoggedIn));
   });
-  it("should render  <NavLink /> if user is not loggedIn", () => {
-    expect(wrapper.find(NavLink)).toHaveLength(2);
-  });
 });
