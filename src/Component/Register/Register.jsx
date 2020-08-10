@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import firebase, { providers, db } from "../../firebase";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+} from "semantic-ui-react";
 
 const Register = (props) => {
   const [nameError, setNameError] = useState("");
-  const [hasAgreedError, sethasAgreedError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [confimPasswordError, setConfimPasswordError] = useState("");
 
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState(props.email || "");
-  const [password, setPassword] = useState(props.password || "");
-  const [confimPassword, setConfimPassword] = useState(
-    props.confimPassword || ""
-  );
-
-  const [hasAgreed, setHasAgreed] = useState(false);
-  const [fireErrors, setFireErrors] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confimPassword, setConfimPassword] = useState("");
 
   const validate = () => {
     let nameError = "";
     let emailError = "";
     let passwordError = "";
-    let hasAgreedError = false;
     let confimPasswordError = "";
 
     if (!name) {
@@ -42,19 +43,8 @@ const Register = (props) => {
       confimPasswordError = "Password does not match";
     }
 
-    if (!hasAgreed) {
-      hasAgreedError = "Require agreement";
-    }
-
-    if (
-      nameError ||
-      hasAgreedError ||
-      passwordError ||
-      emailError ||
-      confimPasswordError
-    ) {
+    if (nameError || passwordError || emailError || confimPasswordError) {
       setNameError(nameError);
-      sethasAgreedError(hasAgreedError);
       setPasswordError(passwordError);
       setEmailError(emailError);
       setConfimPasswordError(confimPasswordError);
@@ -70,18 +60,11 @@ const Register = (props) => {
       .auth()
       .signInWithPopup(providers.google)
       .then((result) => {
-        setUser({ user: result.user });
+        setUser(result.user);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const handleChange = (e) => {
-    let value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
-    setHasAgreed(value);
   };
 
   const handleSubmit = (e) => {
@@ -89,7 +72,7 @@ const Register = (props) => {
     const isValid = validate();
     if (isValid) {
       console.log("it is working");
-      // setErrors("");
+      //       // setErrors("");
     } else {
       console.log("Not working!");
       return false;
@@ -99,120 +82,110 @@ const Register = (props) => {
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         console.log(error);
-        setFireErrors(error.message);
       });
 
     if (
       email !== "" &&
       name !== "" &&
       password.length >= 6 &&
-      password === confimPassword &&
-      hasAgreed !== false
+      password === confimPassword
     ) {
       db.collection("users").add({
         email,
         password,
         name,
-        hasAgreed,
         confimPassword,
       });
     }
   };
 
   return (
-    <div className="FormCenter">
-      <form onSubmit={handleSubmit} className="FormFields">
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="name">
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            className="FormField__Input"
-            placeholder="Enter your full name"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
-        </div>
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="email">
-            E-Mail Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="FormField__Input"
-            placeholder="Enter your email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
-        </div>
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="FormField__Input"
-            placeholder="Enter your password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
-        </div>
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="password">
-            Confirm Your Password
-          </label>
-          <input
-            type="password"
-            id="ConfimPassword"
-            className="FormField__Input"
-            placeholder="Confim your password"
-            name="confimPassword"
-            value={confimPassword}
-            onChange={(e) => setConfimPassword(e.target.value)}
-          />
-          <div style={{ fontSize: 12, color: "red" }}>
-            {confimPasswordError}
-          </div>
-        </div>
-        <div className="FormField">
-          <label className="FormField__CheckboxLabel">
-            <input
-              className="FormField__Checkbox"
-              type="checkbox"
-              name="hasAgreed"
-              value={hasAgreed}
-              onChange={handleChange}
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      {" "}
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" color="teal" textAlign="center">
+          Create an account{" "}
+        </Header>
+        <Form size="large">
+          <Segment stacked>
+            <Form.Input
+              icon="user"
+              iconPosition="left"
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            I agree all statements in{" "}
-            <a href="" className="FormField__TermsLink">
-              terms of service
-            </a>
-            <div style={{ fontSize: 12, color: "red" }}>{hasAgreedError}</div>
-          </label>
-        </div>
-
-        <div className="FormField">
-          <button className="FormField__Button mr-20">Sign Up</button>{" "}
-          <button
-            onClick={(e) => signUp(e)}
-            to="/sign-in"
-            className="FormField__Button mr-20"
-          >
-            Sign up with Google
-          </button>
-        </div>
-      </form>
-    </div>
+            <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
+            <Form.Input
+              icon="user"
+              iconPosition="left"
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              type="password"
+              id="ConfimPassword"
+              placeholder="Confim your password"
+              name="confimPassword"
+              value={confimPassword}
+              onChange={(e) => setConfimPassword(e.target.value)}
+            />
+            <div style={{ fontSize: 12, color: "red" }}>
+              {confimPasswordError}
+            </div>
+            <Button
+              onClick={(e) => handleSubmit(e)}
+              color="teal"
+              fluid
+              size="large"
+              type="button"
+            >
+              Sign Up
+            </Button>{" "}
+            <hr />
+            <Button
+              color="teal"
+              fluid
+              size="large"
+              type="button"
+              onClick={(e) => signUp(e)}
+              to="/login"
+            >
+              Sign up with Google
+            </Button>
+          </Segment>
+        </Form>
+        <Message>
+          Already have an account?{" "}
+          <a href="#/login" to="#/login">
+            Login
+          </a>
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HashRouter as Router, Route, NavLink } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
 import LoggedIn from "../Component/LoggedIn/LoggedIn";
@@ -8,10 +8,6 @@ import "./App.css";
 
 const App = () => {
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    authListener();
-  }, []);
 
   const authListener = () => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -22,6 +18,9 @@ const App = () => {
       }
     });
   };
+  useEffect(() => {
+    authListener();
+  }, []);
 
   return (
     <Router>
@@ -29,29 +28,9 @@ const App = () => {
         {user ? (
           <LoggedIn />
         ) : (
-          <div className="App__Added">
-            <div className="App__Form">
-              <div className="FormTitle">
-                <NavLink
-                  to="/sign-in"
-                  activeClassName="FormTitle__Link--Active"
-                  className="FormTitle__Link"
-                >
-                  Sign In
-                </NavLink>{" "}
-                or{" "}
-                <NavLink
-                  exact
-                  to="/"
-                  activeClassName="FormTitle__Link--Active"
-                  className="FormTitle__Link"
-                >
-                  Sign Up
-                </NavLink>
-              </div>
-              <Route exact path="/" component={Register}></Route>
-              <Route path="/sign-in" component={Login}></Route>
-            </div>
+          <div>
+            <Route path="/login" component={Login}></Route>
+            <Route exact path="/" component={Register}></Route>
           </div>
         )}
       </div>

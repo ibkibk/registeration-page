@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase, { db } from "../../firebase";
 import { Button } from "semantic-ui-react";
+import { Dropdown, Menu } from "semantic-ui-react";
 
 const Logout = () => {
   const [names, setNames] = useState("");
@@ -11,7 +12,6 @@ const Logout = () => {
       setNames(snapshot.docs.map((doc) => doc.data().name));
     });
   }, []);
-
   const signOut = () => {
     firebase.auth().signOut();
   };
@@ -22,15 +22,25 @@ const Logout = () => {
         textAlign: "center",
       }}
     >
-      <h1 style={{ color: "white" }}>Welcome!</h1>
+      <Menu vertical>
+        <Dropdown item text="Home">
+          <Dropdown.Menu>
+            <Dropdown.Item>About</Dropdown.Item>
+            <Dropdown.Item>Carrier</Dropdown.Item>
+            <Dropdown.Item>Contact</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu>
       <Button
         style={{ width: "150px", height: "35px" }}
-        primary
+        color="teal"
         onClick={signOut}
       >
         Logout
       </Button>
-      <h2>This message is coming from firebase database</h2>
+      <h1 style={{ color: "black" }}>Welcome!</h1>
+
+      <h2>You have succesfully logged in</h2>
       <p>{names}</p>
     </div>
   );

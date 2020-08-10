@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import firebase, { providers } from "../../firebase";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+} from "semantic-ui-react";
 
 const Login = (props) => {
   const [user, setUser] = useState(null);
@@ -34,59 +42,101 @@ const Login = (props) => {
     <div className="Error"> {fireErrors} </div>
   ) : null;
   return (
-    <div className="FormCenter">
-      {errorNotification}
-      <form onSubmit={handleSubmit} className="FormFields">
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="email">
-            E-Mail Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="FormField__Input"
-            placeholder="Enter your email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      {" "}
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" color="teal" textAlign="center">
+          Log-in to your account{" "}
+        </Header>
+        {errorNotification}
 
-        <div className="FormField">
-          <label className="FormField__Label" htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="FormField__Input"
-            placeholder="Enter your password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <div className="FormField">
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="FormField__Button "
-          >
-            Sign In
-          </button>{" "}
-          <button
-            type="button"
-            onClick={signIn}
-            to="/"
-            className="FormField__Button "
-          >
-            Sign In with google
-          </button>
-        </div>
-      </form>
-    </div>
+        <Form size="large" onSubmit={handleSubmit}>
+          <Segment stacked>
+            <Form.Input
+              icon="user"
+              iconPosition="left"
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Form.Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
+              type="password"
+              id="password"
+              className="FormField__Input"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              color="teal"
+              fluid
+              size="large"
+              type="button"
+              onClick={handleSubmit}
+            >
+              Sign In
+            </Button>{" "}
+            <hr />
+            <Button
+              color="teal"
+              fluid
+              size="large"
+              type="button"
+              onClick={signIn}
+              to="/"
+            >
+              Sign In with google
+            </Button>
+          </Segment>
+        </Form>
+        <Message>
+          New to us? <a href="#">Sign Up</a>
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 };
 
 export default Login;
+
+//   <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+//     <Grid.Column style={{ maxWidth: 450 }}>
+//       <Header as="h2" color="teal" textAlign="center">
+//         Log-in to your account
+//       </Header>
+//       <Form size="large">
+//         <Segment stacked>
+//           <Form.Input
+//             fluid
+//             icon="user"
+//             iconPosition="left"
+//             placeholder="E-mail address"
+//           />
+//           <Form.Input
+//             fluid
+//             icon="lock"
+//             iconPosition="left"
+//             placeholder="Password"
+//             type="password"
+//           />
+
+//           <Button color="teal" fluid size="large">
+//             Login
+//           </Button>
+//         </Segment>
+//       </Form>
+//       <Message>
+//         New to us? <a href="#">Sign Up</a>
+//       </Message>
+//     </Grid.Column>
+//   </Grid>
+// );
+
+// export default LoginForm;
