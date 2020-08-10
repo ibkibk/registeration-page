@@ -118,9 +118,6 @@ const Register = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {/* <Header as="h5" color="red">
-              {nameError}
-            </Header> */}
             <div style={{ fontSize: 12, color: "red", fontWeight: "bold" }}>
               {nameError}
             </div>
