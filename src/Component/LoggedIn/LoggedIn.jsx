@@ -26,7 +26,7 @@ const Logout = () => {
         <Dropdown item text="Home">
           <Dropdown.Menu>
             <Dropdown.Item>About</Dropdown.Item>
-            <Dropdown.Item>Carrier</Dropdown.Item>
+            <Dropdown.Item>Career</Dropdown.Item>
             <Dropdown.Item>Contact</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
