@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase, { db } from "../../firebase";
-import { Button } from "semantic-ui-react";
-import { Dropdown, Menu } from "semantic-ui-react";
+import { Dropdown, Menu, Button, Header } from "semantic-ui-react";
 
 const Logout = () => {
   const [names, setNames] = useState("");
@@ -38,9 +37,11 @@ const Logout = () => {
       >
         Logout
       </Button>
-      <h1 style={{ color: "black" }}>Welcome!</h1>
+      <Header as="h1">Welcome!</Header>
 
-      <h2>You have succesfully logged in</h2>
+      {/* <h1 style={{ color: "black" }}>Welcome!</h1> */}
+      <Header as="h1">You have succesfully logged in</Header>
+      {/* <h2>You have succesfully logged in</h2> */}
       <p>{names}</p>
     </div>
   );

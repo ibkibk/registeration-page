@@ -9,7 +9,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 
-const Register = (props) => {
+const Register = () => {
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -118,7 +118,12 @@ const Register = (props) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <div style={{ fontSize: 12, color: "red" }}>{nameError}</div>
+            {/* <Header as="h5" color="red">
+              {nameError}
+            </Header> */}
+            <div style={{ fontSize: 12, color: "red", fontWeight: "bold" }}>
+              {nameError}
+            </div>
             <Form.Input
               icon="user"
               iconPosition="left"
@@ -129,7 +134,9 @@ const Register = (props) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div style={{ fontSize: 12, color: "red" }}>{emailError}</div>
+            <div style={{ fontSize: 12, color: "red", fontWeight: "bold" }}>
+              {emailError}
+            </div>
             <Form.Input
               fluid
               icon="lock"
@@ -141,7 +148,9 @@ const Register = (props) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div style={{ fontSize: 12, color: "red" }}>{passwordError}</div>
+            <div style={{ fontSize: 12, color: "red", fontWeight: "bold" }}>
+              {passwordError}
+            </div>
             <Form.Input
               fluid
               icon="lock"
@@ -153,7 +162,7 @@ const Register = (props) => {
               value={confimPassword}
               onChange={(e) => setConfimPassword(e.target.value)}
             />
-            <div style={{ fontSize: 12, color: "red" }}>
+            <div style={{ fontSize: 12, color: "red", fontWeight: "bold" }}>
               {confimPasswordError}
             </div>
             <Button

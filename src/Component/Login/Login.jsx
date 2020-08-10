@@ -39,7 +39,10 @@ const Login = (props) => {
   };
 
   let errorNotification = fireErrors ? (
-    <div className="Error"> {fireErrors} </div>
+    <Header as="h4" style={{ color: "red", fontWeight: "bold" }}>
+      {" "}
+      {fireErrors}{" "}
+    </Header>
   ) : null;
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
