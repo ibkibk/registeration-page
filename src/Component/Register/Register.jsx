@@ -38,7 +38,7 @@ const Register = () => {
       passwordError = "Password required";
     }
     if (password && password.length < 8) {
-      passwordError = "Password must be at least 8 caracters";
+      passwordError = "Password must be at least 8 character";
     }
     if (!confimPassword) {
       confimPasswordError = "Confim your password";
