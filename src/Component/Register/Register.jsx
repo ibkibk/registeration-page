@@ -14,6 +14,7 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [confimPasswordError, setConfimPasswordError] = useState("");
+  const [fireErrors, setFireErrors] = useState("");
 
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
@@ -35,6 +36,9 @@ const Register = () => {
     }
     if (!password) {
       passwordError = "Password required";
+    }
+    if (password && password.length < 8) {
+      passwordError = "Password must be at least 8 caracters";
     }
     if (!confimPassword) {
       confimPasswordError = "Confim your password";
@@ -82,12 +86,13 @@ const Register = () => {
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         console.log(error);
+        setFireErrors(error.message);
       });
 
     if (
       email !== "" &&
       name !== "" &&
-      password.length >= 6 &&
+      password.length >= 8 &&
       password === confimPassword
     ) {
       db.collection("users").add({
@@ -99,6 +104,13 @@ const Register = () => {
     }
   };
 
+  let errorNotification = fireErrors ? (
+    <Header as="h4" style={{ color: "red", fontWeight: "bold" }}>
+      {" "}
+      {fireErrors}{" "}
+    </Header>
+  ) : null;
+
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       {" "}
@@ -106,6 +118,7 @@ const Register = () => {
         <Header as="h2" color="teal" textAlign="center">
           Create an account{" "}
         </Header>
+        {errorNotification}
         <Form size="large">
           <Segment stacked>
             <Form.Input
