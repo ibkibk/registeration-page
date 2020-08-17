@@ -39,9 +39,7 @@ const Logout = () => {
       </Button>
       <Header as="h1">Welcome!</Header>
 
-      {/* <h1 style={{ color: "black" }}>Welcome!</h1> */}
       <Header as="h1">You have succesfully logged in</Header>
-      {/* <h2>You have succesfully logged in</h2> */}
       <p>{names}</p>
     </div>
   );
